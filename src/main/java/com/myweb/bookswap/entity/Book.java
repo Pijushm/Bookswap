@@ -1,6 +1,7 @@
 package com.myweb.bookswap.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Book {
@@ -25,6 +26,9 @@ public class Book {
 
     @ManyToOne
     User bookowner;
+
+    @ManyToMany(mappedBy = "books")
+    List<Genre> genres;
 
 
     public Book() {
