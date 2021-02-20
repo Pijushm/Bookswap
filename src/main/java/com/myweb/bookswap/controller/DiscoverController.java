@@ -19,7 +19,7 @@ public class DiscoverController {
       public String browse(Model model)
       {
           List<Book> books=bookService.getAllBooks();
-
+          System.out.println(books);
           for(Book book:books)
           {
               System.out.println(book.getBookname());

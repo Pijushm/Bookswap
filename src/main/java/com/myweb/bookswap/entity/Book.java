@@ -13,6 +13,7 @@ public class Book {
 
     @Column(nullable = false)
     String bookname;
+    String booknameinbangla;
     String bookauthor;
     @Column(nullable = false)
     String bookcondition;
@@ -20,15 +21,24 @@ public class Book {
     int bookcatog;
     int booklang;
     int buy_avl;
+    @Transient
+    boolean avl_to_buy;
+
     int lend_avl;
+    @Transient
+    boolean avl_to_lend;
+
     int free;
+    @Transient
+    boolean freebook;
+
     int price;
 
     @ManyToOne
     User bookowner;
 
     @ManyToMany(mappedBy = "books")
-    List<Genre> genres;
+    List<Genre> bookgenres;
 
 
     public Book() {
@@ -86,29 +96,6 @@ public class Book {
         this.booklang = booklang;
     }
 
-    public int isBuy_avl() {
-        return buy_avl;
-    }
-
-    public void setBuy_avl(int buy_avl) {
-        this.buy_avl = buy_avl;
-    }
-
-    public int isLend_avl() {
-        return lend_avl;
-    }
-
-    public void setLend_avl(int lend_avl) {
-        this.lend_avl = lend_avl;
-    }
-
-    public int isFree() {
-        return free;
-    }
-
-    public void setFree(int free) {
-        this.free = free;
-    }
 
     public int getPrice() {
         return price;
@@ -125,4 +112,85 @@ public class Book {
     public void setBookowner(User bookowner) {
         this.bookowner = bookowner;
     }
+
+    public List<Genre> getGenres() {
+        return bookgenres;
+    }
+
+
+    public String getBooknameinbangla() {
+        return booknameinbangla;
+    }
+
+    public void setBooknameinbangla(String booknameinbangla) {
+        this.booknameinbangla = booknameinbangla;
+    }
+
+    public int getBuy_avl() {
+        return buy_avl;
+    }
+
+    public void setBuy_avl(int buy_avl) {
+        this.buy_avl = buy_avl;
+    }
+
+    public int getLend_avl() {
+        return lend_avl;
+    }
+
+    public void setLend_avl(int lend_avl) {
+        this.lend_avl = lend_avl;
+    }
+
+    public int getFree() {
+
+        return free;
+    }
+
+    public void setFree(int free) {
+        this.free = free;
+    }
+
+    public boolean isAvl_to_buy() {
+
+
+        return avl_to_buy;
+    }
+
+    public void setAvl_to_buy(boolean avl_to_buy) {
+
+        if(avl_to_buy)
+            this.buy_avl=1;
+        else this.buy_avl=0;
+
+        this.avl_to_buy = avl_to_buy;
+    }
+
+    public boolean isAvl_to_lend() {
+        return avl_to_lend;
+    }
+
+    public void setAvl_to_lend(boolean avl_to_lend) {
+
+        if(avl_to_lend)
+            this.lend_avl=1;
+        else this.lend_avl=0;
+        this.avl_to_lend = avl_to_lend;
+    }
+
+    public boolean isFreebook() {
+
+        return freebook;
+    }
+
+    public void setFreebook(boolean freebook) {
+
+        if(freebook)
+            this.free=1;
+        else this.free=0;
+
+        this.freebook = freebook;
+    }
+
+
 }
