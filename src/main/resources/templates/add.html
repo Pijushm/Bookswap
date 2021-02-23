@@ -99,6 +99,7 @@
 
 <main role="main">
 
+    <span th:text="${@environment.getProperty('upload.path')}"></span>
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
         <div class="container ">
@@ -114,7 +115,7 @@
 
                 <div class="row justify-content-center">
                     <div class="col-lg-6">
-                        <form th:action="@{/addbook}" th:object="${book}" method="post">
+                        <form th:action="@{/addbook}" enctype="multipart/form-data" th:object="${book}" method="post">
                             <!--Need to implement from https://bootsnipp.com/snippets/35D7p -->
                             <div class="container">
                                 <div class="row">
@@ -122,7 +123,7 @@
                                         Front
                                         <div class="imagePreview"></div>
                                         <label class="btn btn-primary">
-                                            Upload<input type="file" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;">
+                                            Upload<input type="file" class="uploadFile img" value="Upload Photo" name="frontimage" accept=".png, .jpg, .jpeg" style="width: 0px;height: 0px;overflow: hidden;">
                                         </label>
                                     </div><!-- col-2 -->
                                     <i class="fa fa-plus imgAdd">+</i>
