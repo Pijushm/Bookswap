@@ -1,8 +1,6 @@
 package com.myweb.bookswap.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
@@ -13,10 +11,13 @@ public class Genre {
       private int genre_id;
       private String name;
 
-      @ManyToMany
+      @ManyToMany(mappedBy = "bookgenres")
       private List<Book> books;
 
 
+    public int getGenre_id() {
+        return genre_id;
+    }
 
     public String getName() {
         return name;
