@@ -8,18 +8,23 @@ import java.util.List;
 public class User {
 
     @Id
-     int user_id;
-     String firsname;
-     String lastname;
-     String email;
-     String district;
-     int   Gender;
-     String password;
+    @Column(name = "username")
+    String userid;
+    String firsname;
+    String lastname;
+    String email;
+    String district;
+    int Gender;
+    String password;
+    private boolean enabled;
 
 
-     @OneToMany(mappedBy = "bookowner",cascade = CascadeType.ALL)
-     List<Book> owned_books;
+    @OneToMany(mappedBy = "bookowner", cascade = CascadeType.ALL)
+    List<Book> owned_books;
 
+
+    @OneToMany(mappedBy = "buser")
+    List<Roles> roles;
 
     public User() {
     }
@@ -80,10 +85,15 @@ public class User {
         this.owned_books = owned_books;
     }
 
-    public String getfullName()
-    {
-        return this.firsname+" "+this.lastname;
+    public String getfullName() {
+        return this.firsname + " " + this.lastname;
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
 
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 }
