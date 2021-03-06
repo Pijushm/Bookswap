@@ -39,7 +39,7 @@ public class SecConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
 //                .logout().logoutSuccessUrl("/");
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/");
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/signout")).logoutSuccessUrl("/");
 
 
         /*
