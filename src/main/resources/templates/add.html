@@ -1,5 +1,6 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -76,21 +77,27 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
+                    <a class="nav-link" th:href="@{/}">Home
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Browse</a>
+                    <a class="nav-link" th:href="@{/browse}">Browse</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">My Books</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" sec:authorize="isAnonymous()">
                     <a class="nav-link" href="signup.html">Sign Up</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Sign In</a>
+                <li class="nav-item" sec:authorize="isAnonymous()">
+                    <a class="nav-link" th:href="@{/signinpage}">Sign In</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" th:href="@{/add}">Add Book</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" th:href="@{/signout}">Sign Out</a>
                 </li>
             </ul>
         </div>
@@ -145,9 +152,9 @@
                                 <textarea class="form-control" th:field="*{bookdescription}" id="exampleFormControlTextarea1" placeholder="Book Description" rows="3"></textarea>
                             </div>
                             <div class="form-group">
-                                <select class="form-control" id="exampleFormControlSelect1" th:field="*{genres}" >
+                                <select class="form-control" id="exampleFormControlSelect1" th:field="*{bookgenres}" >
                                     <option value="Genre" selected="selected">Genre</option>
-                                    <option th:each="genre:${genrelist}" th:value="${genre.getName()}" th:text="${genre.getName()}">
+                                    <option th:each="genre:${genrelist}" th:value="${genre.getGenre_id()}" th:text="${genre.getName()}">
                                     </option>
                                 </select>
                             </div>

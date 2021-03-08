@@ -37,8 +37,14 @@ public class Book {
     @ManyToOne
     User bookowner;
 
-    @ManyToMany(mappedBy = "books")
+    @ManyToMany
+    @JoinTable(name = "genre_books",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id"))/**
+    The inverse side uses the mappedBy attribute to say: "I'm the inverse side. " +
+            "Go see the users attribute in the target entity to see how this association is mapped."*/
     List<Genre> bookgenres;
+
 
 
     public Book() {
@@ -113,9 +119,6 @@ public class Book {
         this.bookowner = bookowner;
     }
 
-    public List<Genre> getGenres() {
-        return bookgenres;
-    }
 
 
     public String getBooknameinbangla() {
@@ -191,6 +194,16 @@ public class Book {
 
         this.freebook = freebook;
     }
+
+    public List<Genre> getBookgenres() {
+        return bookgenres;
+    }
+
+    public void setBookgenres(List<Genre> bookgenres) {
+        this.bookgenres = bookgenres;
+    }
+
+
 
 
 }

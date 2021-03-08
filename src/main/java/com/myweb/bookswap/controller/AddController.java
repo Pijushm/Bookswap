@@ -3,8 +3,10 @@ package com.myweb.bookswap.controller;
 
 import com.myweb.bookswap.dao.BookRepository;
 import com.myweb.bookswap.dao.GenreRepository;
+import com.myweb.bookswap.dao.UserRepository;
 import com.myweb.bookswap.entity.Book;
 import com.myweb.bookswap.entity.Genre;
+import com.myweb.bookswap.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -36,6 +38,9 @@ public class AddController {
 
         @Autowired
         BookRepository bookRepository;
+
+        @Autowired
+       UserRepository userRepository;
 
         @GetMapping("/add")
         public String showAddingPage(Model model)
@@ -80,9 +85,12 @@ public class AddController {
                 byte bytes[]=imagefile.getBytes();
                 Path path= Paths.get(folder.toPath()+"/"+"frontcover"+imagefilename.substring(imagefilename.lastIndexOf(".")));
 
-                //Paths.get(imagedir+"/"+file.getOriginalFilename());
-                System.out.println("Path "+path);
                 Files.write(path,bytes);
+
+
+
+                book.setBookowner(userRepository.getOne("Pijushm"));
+
 
 
                 bookRepository.save(book);
