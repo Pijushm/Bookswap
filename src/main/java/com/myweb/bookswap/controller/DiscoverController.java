@@ -32,7 +32,7 @@ public class DiscoverController {
             String sortField, @Param("sortDir") String sortDir, Model model
     ) {
 
-        Page<Book> pageinfo = bookService.getAllBooks(1, "bookname", "asc", keyword);
+        Page<Book> pageinfo = bookService.getAllBooks(currentPageNo, "bookname", "asc", keyword);
 
         List<Book> books = pageinfo.getContent();
         System.out.println(books);
@@ -40,7 +40,13 @@ public class DiscoverController {
             System.out.println(book.getBookname());
         }
 
+        int totalpage=pageinfo.getTotalPages();
+        long no_of_books=pageinfo.getTotalElements();
         model.addAttribute("books", books);
+        model.addAttribute("total_books",no_of_books);
+        model.addAttribute("total_page",totalpage);
+        model.addAttribute("currentpage",currentPageNo);
+
 
         return "discover";
     }

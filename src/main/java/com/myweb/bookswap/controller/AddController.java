@@ -89,7 +89,7 @@ public class AddController {
 
 
 
-                book.setBookowner(userRepository.getOne(1));
+                book.setBookowner(userRepository.getOne("Pijushm"));
 
 
 

@@ -133,8 +133,8 @@
 
          </div>
          <div class="col-9 text-uppercase">
-                     <a href="#">Previous</a>
-                     <a href="#" class="float-right">Next</a>
+                     <a th:if="${currentpage>1}" th:href="@{/browse/{currentpage}(currentpage=${currentpage}-1)}">Previous</a>
+                     <a th:if="${currentpage<total_page}" th:href="@{/browse/{currentpage}(currentpage=${currentpage}+1)}" class="float-right">Next</a>
                         </div>
                            <div class="clearfix"></div>
          </div>
