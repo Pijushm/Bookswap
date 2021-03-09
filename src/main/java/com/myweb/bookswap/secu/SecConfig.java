@@ -32,6 +32,7 @@ public class SecConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/add").hasRole("USER")
+                .antMatchers("/h2-console/**").permitAll()
                 .and()
                 .formLogin().loginPage("/signinpage")
                 .loginProcessingUrl("/signin")
@@ -47,6 +48,7 @@ public class SecConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/login")
                 .permitAll()
+
                 .antMatchers("/**")
                 .hasAnyRole("ADMIN", "USER")
                 .and()
@@ -64,6 +66,7 @@ public class SecConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable();*/
 
-
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
     }
 }

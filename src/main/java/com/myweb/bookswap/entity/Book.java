@@ -39,7 +39,7 @@ public class Book {
 
     @ManyToMany
     @JoinTable(name = "genre_books",
-            joinColumns = @JoinColumn(name = "user_id"),
+            joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id"))/**
     The inverse side uses the mappedBy attribute to say: "I'm the inverse side. " +
             "Go see the users attribute in the target entity to see how this association is mapped."*/
