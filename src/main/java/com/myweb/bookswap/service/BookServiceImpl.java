@@ -3,6 +3,8 @@ package com.myweb.bookswap.service;
 import com.myweb.bookswap.dao.BookRepository;
 import com.myweb.bookswap.entity.Book;
 import com.myweb.bookswap.entity.Genre;
+import com.myweb.bookswap.entity.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -33,23 +35,72 @@ public class BookServiceImpl implements BookInfoService {
 
         if(keyword!=null)
         {
-          return   bookRepository.find(keyword,pageable);
+          return   bookRepository.find(keyword.toLowerCase(),pageable);
         }
 
         return bookRepository.findAll(pageable);
 
+        
 
     }
 
-    @Override
-    public List<Book> getAllBooks() {
-        return null;
-    }
 
-    @Override
-    public void setBookGenres(List<Genre> genres) {
 
-    }
+	@Override
+	public Book getBook(int id) {
+		// TODO Auto-generated method stub
+		return bookRepository.findById(id).get();
+	}
 
+	@Override
+	public Page<Book> getBooksOfOwner(User user) {
+		
+		Page<Book> books=getBooksOfOwner(user,1,"bookname", "asc");
+		
+		return books;
+	}
+	
+
+	@Override
+	public Page<Book> getBooksOfOwner(User user,int pageNo, String sortField, String sortDir ) {
+		
+		Sort sort=Sort.by(sortField);
+		sort=sortDir.equals("asc")?sort.ascending():sort.ascending();
+		
+		Pageable pageable=PageRequest.of(pageNo-1, 5,sort);
+		
+		
+		return bookRepository.findByBookowner(user,pageable);
+		
+		
+	}
+
+	
+
+
+	@Override
+	public Page<Book> getBooksOfAuthor(String authorname) {
+		// TODO Auto-generated method stub
+		Sort sort=Sort.by("bookname");
+		//sort=sortDir.equals("asc")?sort.ascending():sort.ascending();
+		
+		Pageable pageable=PageRequest.of(1, pagebooksno,sort);
+        Page<Book> books=bookRepository.findByBookauthor(authorname, pageable);
+		
+		return books;
+	}
+
+
+
+	
+
+
+	
+	
+
+
+
+	
+	
 
 }

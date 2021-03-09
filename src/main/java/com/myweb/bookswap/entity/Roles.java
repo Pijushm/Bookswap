@@ -7,6 +7,7 @@ import java.util.List;
 public class Roles {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
 
 
@@ -16,9 +17,16 @@ public class Roles {
 
 
 
-    private String role="ROLE_ADMIN";
+    private String role="ROLE_USER";
 
-    public Roles() {
+   
+    public Roles()
+    {
+    	
+    }
+    
+    public Roles(String role) {
+      this.role=role;
     }
 
     public User getBuser() {

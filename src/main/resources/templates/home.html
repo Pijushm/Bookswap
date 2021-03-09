@@ -35,7 +35,7 @@
                     <a class="nav-link" href="#">My Books</a>
                 </li>
                 <li class="nav-item" sec:authorize="isAnonymous()">
-                    <a class="nav-link" href="signup.html">Sign Up</a>
+                    <a class="nav-link" th:href="@{/signuppage}">Sign Up</a>
                 </li>
                 <li class="nav-item" sec:authorize="isAnonymous()">
                     <a class="nav-link" th:href="@{/signinpage}">Sign In</a>

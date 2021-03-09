@@ -10,9 +10,14 @@ public class User {
     @Id
     @Column(name = "username")
     String userid;
-    String firsname;
+    @Column(name="userno", unique=true)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    int userno;
+    String firstname;
     String lastname;
-    String email;
+    @Column(name="email")
+    //@Email add later
+    String uemail;
     String district;
     int Gender;
     String password;
@@ -29,12 +34,32 @@ public class User {
     public User() {
     }
 
-    public String getFirsname() {
-        return firsname;
+    
+    
+    
+    
+    
+    public String getUserid() {
+		return userid;
+	}
+
+
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+
+
+
+
+
+	public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirsname(String firsname) {
-        this.firsname = firsname;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
     public String getLastname() {
@@ -45,15 +70,20 @@ public class User {
         this.lastname = lastname;
     }
 
-    public String getEmail() {
-        return email;
-    }
+  
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public String getUemail() {
+		return uemail;
+	}
 
-    public String getDistrict() {
+
+	public void setUemail(String uemail) {
+		this.uemail = uemail;
+	}
+
+
+
+	public String getDistrict() {
         return district;
     }
 
@@ -86,7 +116,7 @@ public class User {
     }
 
     public String getfullName() {
-        return this.firsname + " " + this.lastname;
+        return this.firstname + " " + this.lastname;
     }
 
     public boolean isEnabled() {
@@ -96,4 +126,26 @@ public class User {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+	public int getUserno() {
+		return userno;
+	}
+
+	public void setUserno(int userno) {
+		this.userno = userno;
+	}
+
+
+	public List<Roles> getRoles() {
+		return roles;
+	}
+
+
+	public void setRoles(List<Roles> roles) {
+		this.roles = roles;
+	}
+    
+    
+	
+    
 }

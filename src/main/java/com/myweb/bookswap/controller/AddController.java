@@ -25,6 +25,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class AddController {
@@ -46,6 +47,7 @@ public class AddController {
         public String showAddingPage(Model model)
         {
             List<Genre> genreList=genreRepository.findAll();
+
 
             List<String> languages= Arrays.asList(
                     "Bangla","English","Other"
@@ -75,6 +77,7 @@ public class AddController {
                 if(!folder.exists())
                 {
                     folder.mkdirs();
+
                 }
 
                 System.out.println(imagedir);
@@ -98,8 +101,32 @@ public class AddController {
 
 
 
-            return "redirect:/browse";
+           // return "redirect:/browse";
 
+            model.addAttribute("bookid",book.getBookid());
+            return "add2";
+        }
+
+
+
+        @PostMapping("/editbook")
+        public String showEdit(@RequestParam("bookid") String bookid, Model model)
+        {
+
+            Book book=bookRepository.findById(Integer.parseInt(bookid)).get();
+
+            List<Genre> genreList=genreRepository.findAll();
+
+            List<String> languages= Arrays.asList(
+                    "Bangla","English","Other"
+            );
+            model.addAttribute("genrelist",genreList);
+            model.addAttribute("languages",languages);
+            model.addAttribute("book",book);
+            model.addAttribute("bookid",bookid);
+
+            return "add";
+            
         }
 
 
