@@ -105,7 +105,7 @@
                      <div class="bg-white rounded shadow-sm">
                         <img th:src="@{'/uploads/images/books/'+${book.getBookid()}+'/frontcover.jpg'}" alt="" class="img-fluid card-img-top">
                         <div class="p-4">
-                           <h5> <a href="#" class="text-dark" th:text="${book.bookname}">BookName</a></h5>
+                           <h5> <a th:href="@{/book/{bookid}/{bookname}(bookid=${book.bookid},bookname=${book.bookname})}" class="text-dark" th:text="${book.bookname}">BookName</a></h5>
                            <p class="small text-muted mb-0" th:text="${book.getBookauthor()}">Author name</p>
                            <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
                               <p class="small mb-0"><i class="fa fa-picture-o mr-2"></i><span class="font-weight-bold">Available</span></p>

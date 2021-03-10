@@ -10,7 +10,10 @@ public class User {
     @Id
     @Column(name = "username")
     String userid;
-    String firsname;
+    @Column(name="userno", unique=true)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    int userno;
+    String firstname;
     String lastname;
     String email;
     String district;
@@ -29,12 +32,12 @@ public class User {
     public User() {
     }
 
-    public String getFirsname() {
-        return firsname;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirsname(String firsname) {
-        this.firsname = firsname;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
     public String getLastname() {
@@ -86,7 +89,7 @@ public class User {
     }
 
     public String getfullName() {
-        return this.firsname + " " + this.lastname;
+        return this.firstname + " " + this.lastname;
     }
 
     public boolean isEnabled() {
@@ -96,4 +99,15 @@ public class User {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+	public int getUserno() {
+		return userno;
+	}
+
+	public void setUserno(int userno) {
+		this.userno = userno;
+	}
+    
+    
+    
 }

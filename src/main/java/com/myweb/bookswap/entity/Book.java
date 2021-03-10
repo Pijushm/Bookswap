@@ -35,6 +35,7 @@ public class Book {
     int price;
 
     @ManyToOne
+    @JoinColumn(name = "bookowner")
     User bookowner;
 
     @ManyToMany
