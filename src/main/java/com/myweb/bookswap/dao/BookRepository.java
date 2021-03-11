@@ -20,12 +20,15 @@ import java.util.Optional;
 public interface BookRepository extends PagingAndSortingRepository<Book,Integer> {
 
 
+
 //    @Query("select b from Book b where lower(b.bookname) like lower(concat('%', :keyword,'%')) or lower(b.bookauthor) "
 //    		+ "like lower(concat('%', :keyword,'%'))")
 	
 	
 	@Query ("select b from Book b where lower(b.bookname) like %:keyword% or lower(b.bookauthor) like %:keyword%")
     Page<Book> find(@Param("keyword") String keyword,Pageable pageable);//keyword case sensitivity handled before calling
+    
+
     
    
 
