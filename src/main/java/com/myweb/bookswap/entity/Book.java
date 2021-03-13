@@ -22,15 +22,15 @@ public class Book {
     int booklang;
     int buy_avl;
     @Transient
-    boolean avl_to_buy;
+    boolean avl_to_buy=false;
 
     int lend_avl;
     @Transient
-    boolean avl_to_lend;
+    boolean avl_to_lend=false;
 
     int free;
     @Transient
-    boolean freebook;
+    boolean freebook=false;
 
     int price;
 
@@ -202,8 +202,6 @@ public class Book {
     public void setBookgenres(List<Genre> bookgenres) {
         this.bookgenres = bookgenres;
     }
-
-
 
 
 }

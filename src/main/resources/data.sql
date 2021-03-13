@@ -13,12 +13,15 @@ INSERT INTO `genre` VALUES (11, 'GRAPHIC NOVEL');
 INSERT INTO `genre` VALUES (12, 'HORROR');
 
 INSERT INTO `bswapuser` VALUES ('Pijushm', 0, 'Rangpur', 'pijush.m@gmail.com',1, 'Pijush', 'Mohanto', '{noop}test123');
+INSERT INTO `book` VALUES (4, 'সৈয়দ মুজতবা আলী ', 0, '0', '', 1, 'Shabnam', 'শবনম', 0, 0, 1, 0, 'Pijushm');
+INSERT INTO `book` VALUES (5, 'কল্লোল লাহিড়ী', 0, '0', 'খুলনার কলাপোতা গ্রামের ইন্দুর বিয়ে হলো কলকাতায়। দোজবরে মাতাল এক পুরুষের সঙ্গে। তিন সন্তান নিয়ে অল্পকালেই বিধবা।', 1, 'ইন্দুবালা ভাতের হোটেল ', 'ইন্দুবালা ভাতের হোটেল ', 1, 0, 0, 0, 'Pijushm');
+INSERT INTO `book` VALUES (2, 'Sunil Gongopaddhay', 2, 'Good', NULL, 0, 'Prothom Alo', '0', 1, 0, 22, 1, 'Pijushm');
+INSERT INTO `book` VALUES (3, 'Suchitra Bhattacharya', 0, '0', 'উচ্চাকাঙক্ষী, কেরিয়ার-সচেতন, ঝকঝকে সুপাত্র শৌনকের সঙ্গে তন্নিষ্ঠার বিয়ে যখন ঠিকঠাক, তখনই এই মেয়ের জীবনে এল অন্য এক যুবক। অভিমন্যু। পারফিউমের ব্যবসা করে সে নিজের পায়ে দাঁড়াতে চাইছে।', 1, 'Onno Bosonto', 'অন্য বসন্ত', 0, 1, 0, 0, 'Pijushm');
+INSERT INTO `book` VALUES (6, 'Samaresh Majumdar', 0, '0', 'A Story about a woman "Dipaboli". Her struggle against all the odds of the society.', 1, 'সাতকাহন', 'সাতকাহন', 0, 0, 1, 0, 'Pijushm');
+INSERT INTO `book` VALUES (1, 'Harper Lee', 2, 'Good', NULL, 0, 'To Kill a Mockingbid', '0', 1, 0, 22, 1, 'Pijushm');
 
-INSERT INTO `book` VALUES (1, 'Harper Lee', 2, 'Good', NULL, 0, 'To Kill a Mockingbid', 0, 1, 0, 22, 1, 'Pijushm');
-INSERT INTO `book` VALUES (2, 'Sunil Gongopaddhay', 2, 'Good', NULL, 0, 'Prothom Alo', 0, 1, 0, 22, 1, 'Pijushm');
-INSERT INTO `book` VALUES (3, 'Sunil Gongopaddhay', 2, 'Good', NULL, 0, 'Prothom Alo', 0, 1, 0, 22, 1, 'Pijushm');
-INSERT INTO `book` VALUES (4, 'Sunil Gongopaddhay', 2, 'Good', NULL, 0, 'Prothom Alo', 0, 1, 0, 22, 1, 'Pijushm');
-INSERT INTO `book` VALUES (5, 'Sunil Gongopaddhay', 2, 'Good', NULL, 0, 'Prothom Alo', 0, 1, 0, 22, 1, 'Pijushm');
+
+
 
 INSERT INTO `genre_books` VALUES(1,6);
 INSERT INTO `genre_books` VALUES(2,6);

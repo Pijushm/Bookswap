@@ -92,7 +92,9 @@ public class AddController {
 
 
 
+
                 book.setBookowner(userRepository.getOne("Pijushm"));
+
 
 
 
@@ -109,25 +111,7 @@ public class AddController {
 
 
 
-        @PostMapping("/editbook")
-        public String showEdit(@RequestParam("bookid") String bookid, Model model)
-        {
 
-            Book book=bookRepository.findById(Integer.parseInt(bookid)).get();
-
-            List<Genre> genreList=genreRepository.findAll();
-
-            List<String> languages= Arrays.asList(
-                    "Bangla","English","Other"
-            );
-            model.addAttribute("genrelist",genreList);
-            model.addAttribute("languages",languages);
-            model.addAttribute("book",book);
-            model.addAttribute("bookid",bookid);
-
-            return "add";
-            
-        }
 
 
 }
