@@ -1,6 +1,9 @@
 package com.myweb.bookswap.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import java.util.List;
 
 @Entity
@@ -9,6 +12,7 @@ public class User {
 
     @Id
     @Column(name = "username")
+
     String userid;
     @Column(name="userno", unique=true)
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -28,7 +32,7 @@ public class User {
     List<Book> owned_books;
 
 
-    @OneToMany(mappedBy = "buser")
+    @OneToMany(mappedBy = "buser",cascade = CascadeType.ALL)
     List<Roles> roles;
 
     public User() {

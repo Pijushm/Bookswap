@@ -3,6 +3,7 @@ package com.myweb.bookswap.controller;
 import java.util.Arrays;
 
 import javax.management.relation.Role;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,12 +34,11 @@ public class SignUpController {
 	}
 	
 	@PostMapping("/signup")
-	public String signUp(@ModelAttribute User user,Model model)
+	public String signUp(@ModelAttribute @Valid  User user,Model model)
 	{
 		
 		user.setUserno((int)userservice.count()+1);
 		user.setEnabled(true);
-		user.setRoles(Arrays.asList(new Roles("ROLE_USER")));
 		
 		userservice.save(user);
 		

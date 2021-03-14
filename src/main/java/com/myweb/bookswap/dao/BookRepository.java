@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Optional;
 
 
+//put all the query string here later
+
 @Repository
 public interface BookRepository extends PagingAndSortingRepository<Book,Integer> {
 
@@ -33,7 +35,12 @@ public interface BookRepository extends PagingAndSortingRepository<Book,Integer>
    
 
     Page<Book> findByBookowner(User user,Pageable pageable);
+    @Query("select b from Book b join b.bookgenres g where g.name=:genre")
+    Page<Book> findByBookgenres(@Param("genre") String genre,Pageable pageable);
     Page<Book> findByBookauthor(String authorname,Pageable pageable);//what if duplicate author name??
+    
+    @Query("select distinct bookauthor from Book b")
+    List<String> findAuthors();
 
 
 }
