@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,15 +35,20 @@ public class SignUpController {
 	}
 	
 	@PostMapping("/signup")
-	public String signUp(@ModelAttribute @Valid  User user,Model model)
+	public String signUp(@ModelAttribute @Valid  User user,BindingResult result,Model model)
 	{
+	
+		if(result.hasErrors())
+		{
+			return "signup";
+		}
 		
 		user.setUserno((int)userservice.count()+1);
 		user.setEnabled(true);
 		
 		userservice.save(user);
 		
-		return "signup";
+		return "/";
 	}
 	
 	
