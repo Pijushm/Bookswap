@@ -1,10 +1,14 @@
 package com.myweb.bookswap.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import com.myweb.bookswap.dao.UserRepository;
+import com.myweb.bookswap.entity.Roles;
 import com.myweb.bookswap.entity.User;
 
 
@@ -15,10 +19,16 @@ public class UserServiceImpl implements UserService {
 	    UserRepository userrepo;
 
 		@Override
-		public void save(User user) {
+		public void save(User user){//check if you can add throw useralready exists exception here and add it with binding result
+			//rather than while validating
 			
 			//use custom query to save roles
-			
+			user.setPassword("{noop}"+user.getPassword());
+			List<Roles> roles=new ArrayList<>();
+		    Roles role=new Roles("ROLE_USER");
+		    role.setBuser(user);
+		    roles.add(role);
+			user.setRoles(roles);
 			userrepo.save(user);
 			
 		}
@@ -31,6 +41,17 @@ public class UserServiceImpl implements UserService {
 			return userrepo.count();
 		}
 
+
+
+		@Override
+		public Optional<User> get(String userId) {
+			return userrepo.findById(userId);
+			
+			
+		}
+
+		
+		
        
 
 }

@@ -27,7 +27,7 @@
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link  active" href="#">Browse</a>
+                     <a class="nav-link  active" th:href="@{/browse}">Browse</a>
                   </li>
 
                   <li class="nav-item">
@@ -83,14 +83,12 @@
                   <input type="text" placeholder="Search" class="form-control" />
                </form>
                <h6 class="">Genre</h6>
-               <ul>
-                  <li>Art</li>
-                  <li>Classic</li>
+               <ul th:each="genre:${genres}">
+                  <li><a th:href="@{/browse/genre/{genrename}(genrename=${genre.name})}" th:text="${genre.name}"></a></li>
                </ul>
                <h6 class="">Author</h6>
-               <ul>
-                  <li>Harper Lee</li>
-                  <li>Harper Lee</li>
+               <ul th:each="author:${authors}">
+                  <li><a th:href="@{/browse/author/{authorname}(authorname=${author})}" th:text="${author}"></a></li>
                </ul>
                <a href="#">Books near you</a><span class="btn btn-success">GPS</span><br>
                <a href="#">To be sold</a><br>
@@ -109,7 +107,7 @@
                            <p class="small text-muted mb-0" th:text="${book.getBookauthor()}">Author name</p>
                            <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
                               <p class="small mb-0"><i class="fa fa-picture-o mr-2"></i><span class="font-weight-bold">Available</span></p>
-                              <div class="badge badge-danger px-3 rounded-pill font-weight-normal">Condition</div>
+                              <div class="badge badge-danger px-3 rounded-pill font-weight-normal" th:text="${book.bookcondition}">Condition</div>
                            </div>
                         </div>
                      </div>

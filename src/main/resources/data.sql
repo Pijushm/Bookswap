@@ -13,8 +13,8 @@ INSERT INTO `genre` VALUES (11, 'GRAPHIC NOVEL');
 INSERT INTO `genre` VALUES (12, 'HORROR');
 
 
-INSERT INTO `bswapuser` VALUES ('Pijushm', 0, 'Rangpur', 'pijush.m@gmail.com',1, 'Pijush', 'Mohanto', '{noop}test123',1);
-INSERT INTO `bswapuser` VALUES ('Abdm', 0, 'Chittagong', 'abd.m@gmail.com',1, 'Md', 'Abdullah', '{noop}abd123',2);
+INSERT INTO `bswapuser` VALUES ('Pijushm', 0, 'Rangpur', 1, 'Pijush', 'Mohanto','{noop}test123','pijush.m@gmail.com',1);
+INSERT INTO `bswapuser` VALUES ('Abdm', 0, 'Chittagong',1, 'Md', 'Abdullah', '{noop}abd123','abd.m@gmail.com',2);
 
 
 INSERT INTO `book` VALUES (1, 'Harper Lee', 2, 'Good', NULL, 0, 'To Kill a Mockingbid', 0, 1, 0, 22, 1, 'Pijushm');
