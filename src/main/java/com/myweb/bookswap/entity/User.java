@@ -1,25 +1,37 @@
 package com.myweb.bookswap.entity;
 
 import javax.persistence.*;
+
+
+
+
 import javax.validation.GroupSequence;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import com.myweb.bookswap.validation.PasswordValidation;
+
+import com.myweb.bookswap.validation.AdvanceValidation;
+import com.myweb.bookswap.validation.UserExists;
+import com.myweb.bookswap.validation.ValidEmail;
 import com.myweb.bookswap.validation.ValidatePassword;
 
 import java.util.List;
 
+
+
+
+
 @Entity
 @Table(name = "bswapuser")
-@ValidatePassword(groups = PasswordValidation.class)
-@GroupSequence({ User.class, PasswordValidation.class })
+@ValidatePassword(groups = AdvanceValidation.class)
+@GroupSequence({ User.class, AdvanceValidation.class })
 public class User {
 
 	@Id
 	@Column(name = "username")
 
 	@NotBlank(message = "Please Provide a User Id")
+	@UserExists(groups = AdvanceValidation.class)
 	String userid;
 	@Column(name = "userno", unique = true)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,17 +41,19 @@ public class User {
 	String lastname;
 	@Column(name = "email")
 	// @Email add later
-	@Email
+	@ValidEmail(groups = AdvanceValidation.class)
+	//https://github.com/mailcheck/mailcheck can be user later
 	@NotEmpty(message = "Please Provide a email")
 	String uemail;
 	String district;
 	int Gender;
 
+	@NotEmpty(message = "Please Enter password")
 	String password;
 	private boolean enabled;
 
 	@Transient
-	@NotEmpty
+	@NotEmpty(message = "Please Confirm password",groups=AdvanceValidation.class )
 	private String confirmpassword;
 
 	@OneToMany(mappedBy = "bookowner", cascade = CascadeType.ALL)

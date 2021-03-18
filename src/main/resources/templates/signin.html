@@ -9,6 +9,7 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" th:href="@{/css/style.css}">
 
         <title>Sign In</title>
     </head>
@@ -60,9 +61,11 @@
         </div>
     <div class="or-seperator"><i>or</i></div>
       
-     
+  
+     <span th:if="${loginerror}" th:text="${loginerror}" class="error"></span>
  <div class="form-group">
           <input type="text" class="form-control" placeholder="UserName" name="username" id="username">
+          
        </div>
        <div class="form-group">
 

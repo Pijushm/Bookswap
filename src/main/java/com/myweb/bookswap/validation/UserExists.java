@@ -9,14 +9,14 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 
-
-@Constraint(validatedBy = PasswordValidator.class)
+@Constraint(validatedBy = UserExistsValidator.class)
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface ValidatePassword {
-
-	String message() default "Passwords do not match";
+@Target(ElementType.FIELD)
+public @interface UserExists {
+	
+	String message() default "User Already Exists";
 	Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 	
+
 }

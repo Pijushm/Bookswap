@@ -118,10 +118,15 @@
 						<div class="form-group">
 							<input type="password" class="form-control"
 								placeholder="Password" th:field="*{password}">
+								<span class="error" th:if="${#fields.hasErrors('password')}"
+								th:errors="*{password}"></span>
+								
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-control"
-								placeholder="Confirm Password">	
+								placeholder="Confirm Password" th:field="*{confirmpassword}">	
+						   <span class="error" th:if="${#fields.hasErrors('confirmpassword')}"
+								th:errors="*{confirmpassword}"></span>
 								
 						</div>
 
@@ -134,8 +139,8 @@
 
 					</form>
 					<div class="hint-text">
-						Don't have an account? <a href="#" class="text-success">Sign
-							Up!</a>
+						Already have an account? <a th:href="@{/signinpage}" class="text-success">Sign
+							In!</a>
 					</div>
 				</div>
 			</div>

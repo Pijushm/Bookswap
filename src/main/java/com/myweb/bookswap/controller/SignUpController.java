@@ -1,8 +1,6 @@
 package com.myweb.bookswap.controller;
 
-import java.util.Arrays;
 
-import javax.management.relation.Role;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.myweb.bookswap.entity.Roles;
 import com.myweb.bookswap.entity.User;
 import com.myweb.bookswap.service.UserService;
 
@@ -48,7 +45,7 @@ public class SignUpController {
 		
 		userservice.save(user);
 		
-		return "/";
+		return "home";
 	}
 	
 	

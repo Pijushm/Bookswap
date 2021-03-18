@@ -36,6 +36,7 @@ public class SecConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().loginPage("/signinpage")
                 .loginProcessingUrl("/signin")
+                .failureUrl("/signin-error")
                 .defaultSuccessUrl("/")
                 .permitAll()
                 .and()

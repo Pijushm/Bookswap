@@ -9,14 +9,13 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 
-
-@Constraint(validatedBy = PasswordValidator.class)
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface ValidatePassword {
+@Constraint(validatedBy = EmailValidator.class)
+public @interface ValidEmail {
 
-	String message() default "Passwords do not match";
-	Class<?>[] groups() default {};
+	String message() default "Invalid email";
+    Class<?>[] groups() default {}; 
     Class<? extends Payload>[] payload() default {};
 	
 }
