@@ -50,6 +50,15 @@ public class UserServiceImpl implements UserService {
 			
 		}
 
+
+
+		@Override
+		public Optional<User> getByEmail(String email) {
+			
+			return userrepo.findByUemail(email.toLowerCase());
+			
+		}
+
 		
 		
        
