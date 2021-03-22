@@ -33,6 +33,10 @@ public class AddController {
 
        @Value("${upload.path}")
        String imagedir;
+       
+       @Value("#{'${bookconditions}'.split(',')}")
+       List<String> bookconditions;
+       
 
         @Autowired
         GenreRepository genreRepository;
@@ -55,6 +59,7 @@ public class AddController {
 
             model.addAttribute("genrelist",genreList);
             model.addAttribute("languages",languages);
+            model.addAttribute("bookconditions",bookconditions);
             model.addAttribute("book",new Book());
 
             return "add";
@@ -123,6 +128,7 @@ public class AddController {
             model.addAttribute("genrelist",genreList);
             model.addAttribute("languages",languages);
             model.addAttribute("book",book);
+            model.addAttribute("bookconditions",bookconditions);
             model.addAttribute("bookid",bookid);
 
             return "add";

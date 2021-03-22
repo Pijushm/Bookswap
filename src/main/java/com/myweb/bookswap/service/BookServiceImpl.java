@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
+//implement functional interface
 @Service
 public class BookServiceImpl implements BookInfoService {
 
@@ -84,7 +86,7 @@ public class BookServiceImpl implements BookInfoService {
 		Sort sort=Sort.by("bookname");
 		//sort=sortDir.equals("asc")?sort.ascending():sort.ascending();
 		
-		Pageable pageable=PageRequest.of(1, pagebooksno,sort);
+		Pageable pageable=PageRequest.of(0, pagebooksno,sort);
         Page<Book> books=bookRepository.findByBookauthor(authorname, pageable);
 		
 		return books;
@@ -92,9 +94,62 @@ public class BookServiceImpl implements BookInfoService {
 
 
 
+	@Override
+	public Page<Book> getBooksByGenre(String genre) {
+		// TODO Auto-generated method stub
+		
+		
+		return getBooksByGenre(genre, 1, "bookname", "asc");
+	}
+
+
+	
+	public Page<Book> getBooksByGenre(String genre,int pageNo, String sortField, String sortDir) {
+		// TODO Auto-generated method stub
+		
+		Sort sort=Sort.by("bookname");
+		sort=sort.ascending();
+		
+		Pageable pageable=PageRequest.of(pageNo-1, pagebooksno,sort);
+		
+		
+		Page<Book> books=bookRepository.findByBookgenres(genre, pageable);
+		
+		return books;
+	}
+
+
+
+	@Override
+	public List<String> getAllAuthors() {
+		
+		return bookRepository.findAuthors();
+	}
+
+
+
+	@Override
+	public Page<Book> getBooksByAuthor(String authorname) {
+		// TODO Auto-generated method stub
+		return getBooksByAuthor(authorname, 1, "bookname", "asc");
+	}
+
+
 	
 
-
+	public Page<Book> getBooksByAuthor(String authorname,int pageNo, String sortField, String sortDir) {
+		// TODO Auto-generated method stub
+		
+		Sort sort=Sort.by("bookname");
+		sort=sort.ascending();
+		
+		Pageable pageable=PageRequest.of(pageNo-1, pagebooksno,sort);
+		
+		
+		Page<Book> books=bookRepository.findByBookauthor(authorname, pageable);
+		
+		return books;
+	}
 	
 	
 

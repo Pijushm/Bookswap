@@ -1,131 +1,147 @@
 package com.myweb.bookswap.entity;
 
 import javax.persistence.*;
+
+
+
+
+import javax.validation.GroupSequence;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+
+import com.myweb.bookswap.validation.AdvanceValidation;
+import com.myweb.bookswap.validation.UserEmailExists;
+import com.myweb.bookswap.validation.UserIdExists;
+import com.myweb.bookswap.validation.ValidEmail;
+import com.myweb.bookswap.validation.ValidatePassword;
+
 import java.util.List;
+
+
+
+
 
 @Entity
 @Table(name = "bswapuser")
+@ValidatePassword(groups = AdvanceValidation.class)
+@GroupSequence({ User.class, AdvanceValidation.class })
 public class User {
 
-    @Id
-    @Column(name = "username")
-    String userid;
-    @Column(name="userno", unique=true)
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    int userno;
-    String firstname;
-    String lastname;
-    @Column(name="email")
-    //@Email add later
-    String uemail;
-    String district;
-    int Gender;
-    String password;
-    private boolean enabled;
+	@Id
+	@Column(name = "username")
 
+	@NotBlank(message = "Please Provide a User Id")
+	@UserIdExists(groups = AdvanceValidation.class)
+	String userid;
+	@Column(name = "userno", unique = true)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	int userno;
+	@NotBlank(message = "Firstname is needed")
+	String firstname;
+	String lastname;
+	@Column(name = "email")
+	// @Email add later
+	@ValidEmail(groups = AdvanceValidation.class)
+	//https://github.com/mailcheck/mailcheck can be user later
+	@NotEmpty(message = "Please Provide a email")
+	@UserEmailExists(message="Account already registered with this email",groups = AdvanceValidation.class)
+	String uemail;
+	String district;
+	int Gender;
 
-    @OneToMany(mappedBy = "bookowner", cascade = CascadeType.ALL)
-    List<Book> owned_books;
+	@NotEmpty(message = "Please Enter password")
+	String password;
+	private boolean enabled;
 
+	@Transient
+	@NotEmpty(message = "Please Confirm password",groups=AdvanceValidation.class )
+	private String confirmpassword;
 
-    @OneToMany(mappedBy = "buser")
-    List<Roles> roles;
+	@OneToMany(mappedBy = "bookowner", cascade = CascadeType.ALL)
+	List<Book> owned_books;
 
-    public User() {
-    }
+	@OneToMany(mappedBy = "buser", cascade = CascadeType.ALL)
+	List<Roles> roles;
 
-    
-    
-    
-    
-    
-    public String getUserid() {
-		return userid;
+	public User() {
 	}
 
-
+	public String getUserid() {
+		return userid;
+	}
 
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
 
-
-
-
-
-
 	public String getFirstname() {
-        return firstname;
-    }
+		return firstname;
+	}
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
 
-    public String getLastname() {
-        return lastname;
-    }
+	public String getLastname() {
+		return lastname;
+	}
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
 
-  
-
-    public String getUemail() {
+	public String getUemail() {
 		return uemail;
 	}
 
-
 	public void setUemail(String uemail) {
-		this.uemail = uemail;
+		this.uemail = uemail.toLowerCase();
 	}
 
-
-
 	public String getDistrict() {
-        return district;
-    }
+		return district;
+	}
 
-    public void setDistrict(String district) {
-        this.district = district;
-    }
+	public void setDistrict(String district) {
+		this.district = district;
+	}
 
-    public int getGender() {
-        return Gender;
-    }
+	public int getGender() {
+		return Gender;
+	}
 
-    public void setGender(int gender) {
-        Gender = gender;
-    }
+	public void setGender(int gender) {
+		Gender = gender;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public List<Book> getOwned_books() {
-        return owned_books;
-    }
+	public List<Book> getOwned_books() {
+		return owned_books;
+	}
 
-    public void setOwned_books(List<Book> owned_books) {
-        this.owned_books = owned_books;
-    }
+	public void setOwned_books(List<Book> owned_books) {
+		this.owned_books = owned_books;
+	}
 
-    public String getfullName() {
-        return this.firstname + " " + this.lastname;
-    }
+	public String getfullName() {
+		return this.firstname + " " + this.lastname;
+	}
 
-    public boolean isEnabled() {
-        return enabled;
-    }
+	public boolean isEnabled() {
+		return enabled;
+	}
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 
 	public int getUserno() {
 		return userno;
@@ -135,17 +151,20 @@ public class User {
 		this.userno = userno;
 	}
 
-
 	public List<Roles> getRoles() {
 		return roles;
 	}
 
-
 	public void setRoles(List<Roles> roles) {
 		this.roles = roles;
 	}
-    
-    
-	
-    
+
+	public String getConfirmpassword() {
+		return confirmpassword;
+	}
+
+	public void setConfirmpassword(String confirmpassword) {
+		this.confirmpassword = confirmpassword;
+	}
+
 }

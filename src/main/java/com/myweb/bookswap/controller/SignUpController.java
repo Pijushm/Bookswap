@@ -1,17 +1,16 @@
 package com.myweb.bookswap.controller;
 
-import java.util.Arrays;
 
-import javax.management.relation.Role;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.myweb.bookswap.entity.Roles;
 import com.myweb.bookswap.entity.User;
 import com.myweb.bookswap.service.UserService;
 
@@ -33,16 +32,20 @@ public class SignUpController {
 	}
 	
 	@PostMapping("/signup")
-	public String signUp(@ModelAttribute User user,Model model)
+	public String signUp(@ModelAttribute @Valid  User user,BindingResult result,Model model)
 	{
+	
+		if(result.hasErrors())
+		{
+			return "signup";
+		}
 		
 		user.setUserno((int)userservice.count()+1);
 		user.setEnabled(true);
-		user.setRoles(Arrays.asList(new Roles("ROLE_USER")));
 		
 		userservice.save(user);
 		
-		return "signup";
+		return "home";
 	}
 	
 	

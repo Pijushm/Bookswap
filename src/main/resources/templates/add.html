@@ -70,7 +70,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
-        <a class="navbar-brand" href="#">Book Swap</a>
+        <a class="navbar-brand" th:href="@{/}">Book Swap</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -149,10 +149,10 @@
 
                             <div class="form-group">
 
-                                <textarea class="form-control" th:field="*{bookdescription}" id="exampleFormControlTextarea1" placeholder="Book Description" rows="3"></textarea>
+                                <textarea class="form-control" th:field="*{bookdescription}"  placeholder="Book Description" rows="3"></textarea>
                             </div>
                             <div class="form-group">
-                                <select class="form-control" id="exampleFormControlSelect1" th:field="*{bookgenres}" >
+                                <select class="form-control"  th:field="*{bookgenres}" >
                                     <option value="0" selected="selected">Genre</option>
                                     <option th:each="genre:${genrelist}" th:value="${genre.getGenre_id()}" th:text="${genre.getName()}">
                                     </option>
@@ -160,9 +160,9 @@
                             </div>
 
                             <div class="form-group">
-                                <select class="form-control" id="exampleFormControlSelect1" th:field="*{bookcondition}">
-                                    <option th:value="0">Condition</option>
-
+                                <select class="form-control"  th:field="*{bookcondition}">
+                                    <option th:value="Condition">Condition</option>
+                                    <option th:each="condition:${bookconditions}" th:value="${condition}" th:text="${condition}">
                                 </select>
                             </div>
 
