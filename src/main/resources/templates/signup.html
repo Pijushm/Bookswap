@@ -52,9 +52,9 @@
 					<form th:action="@{/signup}" method="post" th:object="${user}">
 						<h2 class="text-center">Sign Up</h2>
 						<div class="text-center social-btn">
-							<a href="#" class="btn btn-primary btn-block"><i
+							<a th:href="${facebookloginurl}" class="btn btn-primary btn-block"><i
 								class="fa fa-facebook"></i> Sign Up with <b>Facebook</b></a> <a
-								href="#" class="btn btn-danger btn-block"><i
+								th:href="${googleloginurl}" class="btn btn-danger btn-block"><i
 								class="fa fa-google"></i> Sign Up with <b>Google</b></a>
 						</div>
 						<div class="or-seperator">

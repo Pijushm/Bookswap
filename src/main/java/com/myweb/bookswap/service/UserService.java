@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.myweb.bookswap.entity.ConfirmationToken;
 import com.myweb.bookswap.entity.User;
 
 
@@ -14,6 +15,7 @@ public interface UserService {
 	Optional<User> get(String userId);
 	Optional<User> getByEmail(String email);
 	long count();
+	
 	
 	
 }
