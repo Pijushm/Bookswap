@@ -13,7 +13,7 @@ INSERT INTO `genre` VALUES (11, 'GRAPHIC NOVEL');
 INSERT INTO `genre` VALUES (12, 'HORROR');
 
 
-INSERT INTO `bswapuser` VALUES ('Pijushm', 0, 'Rangpur', 1, 'Pijush', 'Mohanto','{noop}test123','pijushmohanto@gmail.com',1);
+INSERT INTO `bswapuser` VALUES ('Pijushm', 0, 'Rangpur', 1, 'Pijush', 'Mohanto','$2a$10$2pgptprgPP7zXPue53EVUe/IAt5WwIqVo0HoA9HHnqkO6LPlKLZdi','pijushmohanto@gmail.com',1);
 INSERT INTO `bswapuser` VALUES ('Abdm', 0, 'Chittagong',1, 'Md', 'Abdullah', '{noop}abd123','abd.m@gmail.com',2);
 
 

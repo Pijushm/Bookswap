@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,9 @@ public class UserServiceImpl implements UserService {
 			
 			//use custom query to save roles
 			//user.setPassword("{noop}"+user.getPassword());
-			user.setPassword(passwordEncoder.encode(user.getPassword()));
+			BCryptPasswordEncoder Encoder = new BCryptPasswordEncoder();
+			System.out.println(user.getPassword());
+			user.setPassword(Encoder.encode(user.getPassword()));
 			List<Roles> roles=new ArrayList<>();
 		    Roles role=new Roles("ROLE_USER");
 		    role.setBuser(user);
@@ -38,6 +41,14 @@ public class UserServiceImpl implements UserService {
 			userrepo.save(user);
 			
 		}
+		
+
+
+		@Override
+		public void update(User user) {
+		   userrepo.save(user);
+		}
+
 		
 	
     
@@ -64,6 +75,7 @@ public class UserServiceImpl implements UserService {
 			return userrepo.findByUemail(email.toLowerCase());
 			
 		}
+
 
 
 

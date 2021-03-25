@@ -45,6 +45,7 @@ public class EmailConfirmationServiceImpl implements EmailConfirmationService {
         email.setText("To confirm your account, please click here : "
                 +"http://localhost:8081/registrationConfirm?token="+token);
         //change the message later(welcome message + clickable link)
+        
         mailSender.send(email);
 	}
 

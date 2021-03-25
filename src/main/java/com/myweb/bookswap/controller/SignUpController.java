@@ -118,7 +118,7 @@ public class SignUpController {
 	 	     // https://www.baeldung.com/spring-redirect-and-forward
 	 	    } 
 	    	user.setEnabled(true);
-	    	userservice.save(user);
+	    	userservice.update(user);
 	    	String message="Account Verified";
 	        attributes.addFlashAttribute("message", message);
 	        return new RedirectView("/");

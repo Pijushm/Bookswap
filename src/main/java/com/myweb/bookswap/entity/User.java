@@ -51,6 +51,7 @@ public class User {
 	int Gender;
 
 	@NotEmpty(message = "Please Enter password")
+	@Column(length = 100) 
 	String password;
 	private boolean enabled;
 
