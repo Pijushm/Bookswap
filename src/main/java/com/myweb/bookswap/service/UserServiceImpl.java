@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.myweb.bookswap.dao.UserRepository;
@@ -17,13 +21,18 @@ public class UserServiceImpl implements UserService {
 
 	    @Autowired
 	    UserRepository userrepo;
+	    
+	    @Autowired
+	    private PasswordEncoder passwordEncoder;
 
 		@Override
 		public void save(User user){//check if you can add throw useralready exists exception here and add it with binding result
 			//rather than while validating
 			
 			//use custom query to save roles
-			user.setPassword("{noop}"+user.getPassword());
+			//user.setPassword("{noop}"+user.getPassword());
+		
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
 			List<Roles> roles=new ArrayList<>();
 		    Roles role=new Roles("ROLE_USER");
 		    role.setBuser(user);
@@ -32,6 +41,14 @@ public class UserServiceImpl implements UserService {
 			userrepo.save(user);
 			
 		}
+		
+
+
+		@Override
+		public void update(User user) {
+		   userrepo.save(user);
+		}
+
 		
 	
     
@@ -58,6 +75,37 @@ public class UserServiceImpl implements UserService {
 			return userrepo.findByUemail(email.toLowerCase());
 			
 		}
+
+
+
+		@Override
+		public Optional<User> getCurrentUser(Authentication authentication) {
+		
+			String currentUserName="";
+			if (!(authentication instanceof AnonymousAuthenticationToken)) {
+			     currentUserName = authentication.getName();
+			    
+			}
+			
+			return userrepo.findById(currentUserName);
+			
+		}
+
+
+
+		@Override
+		public Optional<User> getCurrentUser() {
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			return getCurrentUser(authentication);
+		}
+
+
+        
+
+	
+
+
+		
 
 		
 		
