@@ -15,11 +15,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
 
 import com.myweb.bookswap.service.BookSwapOauth2UserService;
 
-
+//https://www.baeldung.com/spring-security-block-brute-force-authentication-attempts
 
 import javax.sql.DataSource;
 
@@ -35,6 +38,7 @@ public class SecConfig extends WebSecurityConfigurerAdapter {
     
     @Autowired
     BookSwapOauth2UserService Oauth2userservice;
+    
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -81,6 +85,11 @@ public class SecConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/")
                 .permitAll()
                 .and()
+                .rememberMe()
+                .key("uniqueAndSecret")
+                .tokenRepository(persistentTokenRepository())
+                .userDetailsService(userDetailsService)
+                .and()
 //                .logout().logoutSuccessUrl("/");
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/signout")).logoutSuccessUrl("/")
                 .and()
@@ -117,4 +126,11 @@ public class SecConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.headers().frameOptions().disable();
     }
+    
+    
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
+        db.setDataSource(dataSource);
+        return db;
+   }
 }

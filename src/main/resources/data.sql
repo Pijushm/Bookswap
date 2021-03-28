@@ -29,3 +29,7 @@ INSERT INTO `genre_books` VALUES(2,6);
 INSERT INTO authorities VALUES (1,'ROLE_USER','Pijushm');
 
 Insert into CONFIRMATION_TOKEN ( TOKEN_ID , CONFIMATION_TOKEN , EXPIRY_DATE , USER_ID ) VALUES('2','3d110cab-b3a1-457e-9cf0-b2d7d45d460c','2021-03-22 15:48:28.488','Pijushm');
+
+
+
+
