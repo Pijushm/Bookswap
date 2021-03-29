@@ -4,7 +4,9 @@ package com.myweb.bookswap.controller;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,7 @@ import com.myweb.bookswap.entity.ConfirmationToken;
 import com.myweb.bookswap.entity.User;
 import com.myweb.bookswap.service.EmailConfirmationService;
 import com.myweb.bookswap.service.UserService;
+
 
 @Controller
 public class SignUpController {
@@ -64,7 +67,7 @@ public class SignUpController {
 		
 		model.addAttribute("facebookloginurl",oauth2AuthenticationUrls.get("Facebook"));
 		model.addAttribute("googleloginurl", oauth2AuthenticationUrls.get("Google"));
-		
+		model.addAttribute("githubloginurl", oauth2AuthenticationUrls.get("GitHub"));
 		model.addAttribute("user", new User());
 		
 		return "signup";
@@ -154,6 +157,23 @@ public class SignUpController {
 		model.addAttribute("expired", model.getAttribute("expired"));
 		model.addAttribute("token", model.getAttribute("token"));
 		return "badUser";
+	}
+	
+	
+	@GetMapping("/continueauthRegistration")
+	public RedirectView ContinueAuthRegistration(HttpServletRequest request,Model model) {
+		
+		return new RedirectView("signupcontinue");
+		
+		
+	}
+	
+	@GetMapping("/processauthRegistration")
+	public RedirectView ProcessAuthRegistration(HttpServletRequest request,Model model) {
+		
+		return new RedirectView("signupcontinue");
+		
+		
 	}
 	
 }

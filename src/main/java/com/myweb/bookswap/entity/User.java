@@ -34,6 +34,7 @@ public class User {
 	@NotBlank(message = "Please Provide a User Id")
 	@UserIdExists(groups = AdvanceValidation.class)
 	String userid;
+	//https://www.bookcrossing.com/join
 	@Column(name = "userno", unique = true)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int userno;
