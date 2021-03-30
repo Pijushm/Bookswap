@@ -11,7 +11,7 @@ import javax.validation.Payload;
 
 @Constraint(validatedBy = {UserExistsValidator.class})
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
+@Target({ElementType.FIELD,ElementType.PARAMETER})
 public @interface UserIdExists {
 	
 	String message() default "Sorry,Username Already Taken";

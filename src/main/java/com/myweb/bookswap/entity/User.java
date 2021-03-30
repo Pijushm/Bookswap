@@ -39,7 +39,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int userno;
 	@NotBlank(message = "Firstname is needed")
-	String firstname;
+	String firstname;//fulllname instead of firstname and lastname
 	String lastname;
 	@Column(name = "email")
 	// @Email add later
@@ -65,6 +65,10 @@ public class User {
 
 	@OneToMany(mappedBy = "buser", cascade = CascadeType.ALL)
 	List<Roles> roles;
+
+
+
+	String loginuserid;
 
 	public User() {
 	}
@@ -169,4 +173,11 @@ public class User {
 		this.confirmpassword = confirmpassword;
 	}
 
+	public String getLoginuserid() {
+		return loginuserid;
+	}
+
+	public void setLoginuserid(String loginuserid) {
+		this.loginuserid = loginuserid;
+	}
 }

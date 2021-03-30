@@ -8,15 +8,22 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
+import com.myweb.bookswap.validation.UserEmailExistsValidator;
+import com.myweb.bookswap.validation.UserIdExists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ResolvableType;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,6 +36,8 @@ import com.myweb.bookswap.entity.ConfirmationToken;
 import com.myweb.bookswap.entity.User;
 import com.myweb.bookswap.service.EmailConfirmationService;
 import com.myweb.bookswap.service.UserService;
+
+import static org.springframework.security.web.context.HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY;
 
 
 @Controller
@@ -161,19 +170,52 @@ public class SignUpController {
 	
 	
 	@GetMapping("/continueauthRegistration")
-	public RedirectView ContinueAuthRegistration(HttpServletRequest request,Model model) {
-		
-		return new RedirectView("signupcontinue");
-		
-		
-	}
-	
-	@GetMapping("/processauthRegistration")
-	public RedirectView ProcessAuthRegistration(HttpServletRequest request,Model model) {
-		
-		return new RedirectView("signupcontinue");
+	public String ContinueAuthRegistration(HttpServletRequest request,Model model) {
+
+
+
+		return "signupcontinue";
 		
 		
 	}
+
+
+	@PostMapping("/processauthRegistration")
+	public String ProcessAuthRegistration(@RequestParam("buserid") String buserid, @RequestParam("buserdistrict")
+			 String buserdistrict,Model model ,HttpServletRequest request) {
+
+		if(buserid.equals(""))
+		{
+			model.addAttribute("useriderrorexist",Boolean.TRUE);
+			model.addAttribute("useriderror","Please Provide User Id");
+			return "signupcontinue";
+		}
+		if(userservice.get(buserid).isPresent())
+		{
+			model.addAttribute("useriderrorexist",Boolean.TRUE);
+			model.addAttribute("useriderror","UserId Already Exists");
+			model.addAttribute("useridgiven",buserid);
+
+			return "signupcontinue";
+		}
+
+
+		User user=(User)request.getSession().getAttribute("newuser");
+		user=userservice.get(user.getUserid()).get();
+		user.setLoginuserid(buserid);
+		user.setDistrict(buserdistrict);
+		userservice.update(user);
+
+
+
+
+
+		return "redirect:/";
+		
+		
+	}
+
+
+
 	
 }

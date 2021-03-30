@@ -11,6 +11,7 @@ public interface UserService {
 
 	
 	void save(User user);
+	void saveAuthUser(User user);
 	Optional<User> getCurrentUser(Authentication authentication);
 	Optional<User> getCurrentUser();
 	void update(User user);

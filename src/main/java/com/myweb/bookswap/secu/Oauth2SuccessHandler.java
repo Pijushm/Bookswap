@@ -10,12 +10,15 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import com.myweb.bookswap.entity.BookSwapOauth2User;
 import com.myweb.bookswap.entity.User;
 import com.myweb.bookswap.service.UserService;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Oauth2SuccessHandler implements AuthenticationSuccessHandler {
 
 	@Autowired
@@ -29,19 +32,35 @@ public class Oauth2SuccessHandler implements AuthenticationSuccessHandler {
 //        System.out.println(oauthUser.getName());
 //        System.out.println(oauthUser.getEmail());
 //        System.out.println(oauthUser.getAttributes());
-//        
+//
 		String user_fullname = oauthUser.getName();
 		String user_email = oauthUser.getEmail();
 
-		// set database operation to save
+
 
 		Optional<User> user = userservice.getByEmail(user_email);
 
-		
+
+
 		if(!user.isPresent())
 		{   HttpSession session=request.getSession();
-		    session.setAttribute("newusername", user_fullname);
-		    session.setAttribute("newuemail", user_email);
+
+//		    session.invalidate();
+//		    SecurityContextHolder.clearContext();
+//
+//		    session=request.getSession();
+			User newuser=new User();
+			newuser.setUserno((int)userservice.count()+1);
+			newuser.setUserid(user_email);
+			newuser.setUemail(user_email);
+			newuser.setFirstname(user_fullname);
+			newuser.setLastname("");
+			newuser.setEnabled(false);
+			newuser.setPassword("NotGiven");
+			userservice.saveAuthUser(newuser);
+
+		    session.setAttribute("newuser",newuser);
+
 			
 		    request.getRequestDispatcher("/continueauthRegistration").forward(request, response);
 			
@@ -70,5 +89,6 @@ public class Oauth2SuccessHandler implements AuthenticationSuccessHandler {
 		//
 
 	}
+
 
 }
