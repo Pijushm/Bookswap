@@ -78,7 +78,13 @@ public class AddController {
                 long total_books=bookRepository.count();
 
 
-                File folder=new File(imagedir+"/"+(total_books+1));
+
+                book.setBookowner(userRepository.getOne("Pijushm"));
+
+               book= bookRepository.save(book);
+
+
+                File folder=new File(imagedir+"/"+book.getBookid());
                 if(!folder.exists())
                 {
                     folder.mkdirs();
@@ -93,15 +99,8 @@ public class AddController {
                 byte bytes[]=imagefile.getBytes();
                 Path path= Paths.get(folder.toPath()+"/"+"frontcover"+imagefilename.substring(imagefilename.lastIndexOf(".")));
 
+                //if database connection is lost files wont be write
                 Files.write(path,bytes);
-
-
-
-                book.setBookowner(userRepository.getOne("Pijushm"));
-
-
-
-                bookRepository.save(book);
             }
 
 
