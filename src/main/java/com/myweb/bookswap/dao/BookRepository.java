@@ -41,4 +41,5 @@ public interface BookRepository extends PagingAndSortingRepository<Book,Integer>
     List<String> findAuthors();
 
 
+    List<Book> findByBookname(String name);
 }

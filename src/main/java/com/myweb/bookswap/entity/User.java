@@ -67,6 +67,8 @@ public class User {
 	List<Roles> roles;
 
 
+	@OneToMany(mappedBy = "buser", cascade = CascadeType.ALL)
+	List<WishList> wishes;
 
 	String loginuserid;
 
@@ -179,5 +181,13 @@ public class User {
 
 	public void setLoginuserid(String loginuserid) {
 		this.loginuserid = loginuserid;
+	}
+
+	public List<WishList> getWishes() {
+		return wishes;
+	}
+
+	public void setWishes(List<WishList> wishes) {
+		this.wishes = wishes;
 	}
 }

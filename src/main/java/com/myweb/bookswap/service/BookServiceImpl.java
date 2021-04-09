@@ -55,6 +55,11 @@ public class BookServiceImpl implements BookInfoService {
 	}
 
 	@Override
+	public List<Book> getBookByName(String name) {
+		return bookRepository.findByBookname(name);
+	}
+
+	@Override
 	public Page<Book> getBooksOfOwner(User user) {
 		
 		Page<Book> books=getBooksOfOwner(user,1,"bookname", "asc");
