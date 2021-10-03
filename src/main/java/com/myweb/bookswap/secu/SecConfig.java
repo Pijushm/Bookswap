@@ -38,7 +38,10 @@ public class SecConfig extends WebSecurityConfigurerAdapter {
     
     @Autowired
     BookSwapOauth2UserService Oauth2userservice;
-    
+
+
+    @Autowired
+    AuthenticationSuccessHandler authenticationSuccessHandler;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -97,7 +100,7 @@ public class SecConfig extends WebSecurityConfigurerAdapter {
                 .userInfoEndpoint()
                 .userService(Oauth2userservice)
                 .and()
-                .successHandler(new Oauth2SuccessHandler());
+                .successHandler(authenticationSuccessHandler);
 
 
         /*

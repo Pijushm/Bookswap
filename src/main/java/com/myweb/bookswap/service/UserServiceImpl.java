@@ -31,20 +31,33 @@ public class UserServiceImpl implements UserService {
 			
 			//use custom query to save roles
 			//user.setPassword("{noop}"+user.getPassword());
-		
+
+
 			user.setPassword(passwordEncoder.encode(user.getPassword()));
 			List<Roles> roles=new ArrayList<>();
 		    Roles role=new Roles("ROLE_USER");
 		    role.setBuser(user);
 		    roles.add(role);
 			user.setRoles(roles);
+			user.setLoginuserid(user.getLoginuserid());
 			userrepo.save(user);
 			
 		}
-		
+
+	@Override
+	public void saveAuthUser(User user) {
+		user.setPassword("NotGiven");
+		List<Roles> roles=new ArrayList<>();
+		Roles role=new Roles("ROLE_USER");
+		role.setBuser(user);
+		roles.add(role);
+		user.setRoles(roles);
+		userrepo.save(user);
+
+	}
 
 
-		@Override
+	@Override
 		public void update(User user) {
 		   userrepo.save(user);
 		}
